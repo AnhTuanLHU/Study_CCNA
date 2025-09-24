@@ -1,4 +1,4 @@
-# 1. NETWORKING DEVICES
+# NETWORKING DEVICES
 
 ## What is a network?
 

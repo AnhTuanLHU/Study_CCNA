@@ -1,4 +1,4 @@
-# 2. INTERFACES AND CABLES
+# INTERFACES AND CABLES
 
 ## SWITCHES provide many PORTS for connectivity (usually 24)
 

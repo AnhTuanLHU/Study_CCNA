@@ -1,4 +1,4 @@
-## 4. Introduce to the CLI
+## Introduce to the CLI
 
 ## What IS CLI?
 

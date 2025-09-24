@@ -1,4 +1,4 @@
-# 3. OSI MODEL & TCP/IP SUITE
+# OSI MODEL & TCP/IP SUITE
 
 ## What is a networking model?
 
