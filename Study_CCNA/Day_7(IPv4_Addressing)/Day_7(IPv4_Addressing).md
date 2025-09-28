@@ -1,0 +1,266 @@
+## IPv4 ADDRESSING : PART 1
+
+---
+
+OSI MODEL - NETWORK LAYER (Layer 3)
+
+- Provides connectivity between end hosts on DIFFERENT networks (ie: outside of the LAN)
+- Provides logical addressing (IP addresses)
+- Provides path selection between SOURCE and DESTINATION
+- ROUTERS operate at LAYER 3
+
+ROUTING
+
+SWITCHES (Layer 2 Devices) do no separate different networks. They connect and EXPAND networks within the same LAN.
+
+By adding a ROUTER, however, between two SWITCHES, you create a SPLIT in the network; each with it's own network IP address.
+
+Example: 192.168.1.0/24 (255.255.255.0) 192.168.2.0/24 (255.255.255.0)
+
+![alt text](image.png)
+
+The IP Address depends on network address of the LAN it is connects to.
+
+The NETWORK portion of given IP Address will be the same for all HOSTS on a given LAN.
+
+Example:
+
+192.168.1.100 192.168.1.105 192.168.1.205
+
+All of these addresses are on the SAME Network because the NETWORK PORTION of their IP Address is the same (192.168.1) while the HOST part (100,105,205) is UNIQUE!
+
+When a BROADCAST message hits a ROUTER, it does NOT continue onward. It stays within the LOCAL LAN (Switch/Hosts).
+
+---
+## IPv4 Header
+
+![alt text](image-1.png)
+
+IP (Internet Protocol) is the primary Layer 3 protocol in use today. Version 4 is the version in use in most networks.
+
+IPv4 Headers contain MORE fields than the ETHERNET header.
+
+IPv4 Headers contain a SOURCE IP Address and DESTINATION IP Address field.
+
+This FIELD is 32-bits(4-bytes) in length (0-31)
+
+192.168.1.254 (each decimal number represents 8 bits)
+
+Translated to Binary:
+
+11000000 . 10101000 . 00000001 . 11111110
+
+EACH of these 8 bit groups are referred to as an OCTET
+
+Since Binary is difficult to read for people, we use the Dotted Decimal format.
+
+
+---
+
+REVIEW of DECIMAL and HEXADECIMAL
+
+![alt text](image-2.png)
+
+Decimal (base 10)
+
+Ex: 3294 = (3 * 1000) + (2 * 100) + (9 * 10) + (4 * 1)
+
+Hexadecimal (base 16)
+
+Ex: 3294, would be CDE
+```
+C (C * 256 / 12 * 256 = 3072) // 256ths position
+D (D * 16 / D=13 so 16*13 = 208) // 16ths position
+E (E * 1 / E = 14)	// 1s position
+```
+Adding these up, we get 3294
+
+---
+
+So, how do we convert a BINARY NUMBER to a DECIMAL NUMBER?
+The same way we convert to Hexadecimal.
+
+10001111
+
+So:
+```
+1 * 128 = 128
+1 * 8 = 8
+1 * 4 = 4
+1 * 2 = 2
+1 * 1 = 1
+```
+Add them all up : 128 + 8 + 4 + 2 + 1 = 143
+
+The answer is 143.
+
+---
+
+Another example:
+
+01110110
+```
+1 * 64 = 64
+1 * 32 = 32
+1 * 16 = 16
+1 * 4 = 4
+1 * 2 = 2
+```
+Add them all up: 64 + 32 + 16 + 4 + 2 = 118
+
+The answer is 118.
+
+---
+## Convert DECIMAL TO BINARY NUMBER
+
+So, how do we convert a DECIMAL NUMBER to a BINARY NUMBER?
+
+Take the number 221.
+
+We can take that number and start subtracting it from LEFT to RIGHT of our Binary slots.
+
+221
+```
+221 - 128 = 93 so we place a 1 in the "128" slot
+```
+10000000
+```
+93 - 64 = 29 so we place another 1 in the "64" slot
+
+29 - 32 isn't possible so we place a 0 in the "32" slot
+
+29 - 16 = 13 so we place a 1 in the "16" slot
+
+13 - 8 = 5 so we place a 1 in the "8" slot
+
+5 - 4 = 1 so we place a 1 in the "4" slot
+
+1 - 2 isn't possible so we put a 0 in the "2" slot
+
+1 - 1 is possible so we put a 1 in the "1" slot
+```
+This, then, allows us to the write out the BINARY number for 221.
+
+It is : 11011101
+
+---
+
+## IPv4 ADDRESSES
+
+So we now know that IP Addresses are the Dotted Decimal conversion of a series of BINARY NUMBERS (broken up into 4 OCTETS) like so:
+
+192.168.1.254/24
+
+But what does the /24 stand for?
+
+![alt text](image-3.png)
+
+It means the FIRST 24 BITS of this address represent the NETWORK portion of the address.
+
+192.168.1 is the NETWORK PORTION (the first 3 OCTETS)
+
+.254 is the HOST PORTION (the last OCTET)
+
+![alt text](image-4.png)
+---
+
+## CONVERT this BINARY number into an IPv4 Address:
+
+10011010010011100110111100100000
+
+10011010 . 01001110 . 01101111 . 00100000
+
+Octets:
+
+1. 128 + 16 + 8 + 2 = 154
+2. 64 + 8 + 4 + 2 = 78
+3. 64 + 32 + 8 + 4 + 2 + 1 = 111
+4. 32
+
+The IPv4 address is: 154.78.111.32/16
+
+154.78 is the NETWORK PORTION
+111.32 is the HOST PORTION
+
+Another Example:
+
+00001100100000001111101100010111
+
+00001100 . 10000000 . 11111011 . 00010111
+
+Octets:
+
+1. 8 + 4 = 12
+2. 128
+3. 255 - 4 = 251
+4. 16 + 4 + 2 + 1 = 23
+
+The IPv4 address is: 12.128.251.23/8
+
+12 is the NETWORK PORTION
+128.251.23 is the HOST PORTION
+
+---
+
+## IPv4 ADDRESS CLASSES
+
+IPv4 ADDRESSES are split up into 5 different 'classes'. The class of an IPv4 is determined by the FIRST OCTET of the address.
+
+CLASS FIRST OCTET FIRST OCTET NUMBERIC RANGE
+
+A 0xxxxxxx 0-126 + 127 'loopback' B 10xxxxxx 128-191 C 110xxxxx 192-223 D 1110xxxx 224-239 E 1111xxxx 240-255
+
+From the above chart, if the FIRST OCTECT STARTS with 0, the numeric RANGE of possible first DOTTED DECIMAL is between 0-127.
+
+The CLASSES we will be focusing on are CLASS A to CLASS C.
+
+![alt text](image-5.png)
+
+D CLASS are reserved for 'MULTICAST' ADDRESSES
+
+E CLASS are reserved for 'EXPERIMENTAL' ADDRESSES
+
+---
+A CLASS USUALLY have a range of 1-126? WHY?
+
+Because 127 is usually reserved for 'loopback addresses'
+
+127.0.0.0 to 127.255.255.255 are used to test the network.
+
+- Used to test the 'Network stack' (OSI & TCP/IP model) on the local device.
+
+---
+
+## NetMask
+
+![alt text](image-6.png)
+
+A NETMASK is written like a Dotted Decimal IP Address
+
+CLASS A: /8 = 255.0.0.0
+
+CLASS B: / 16 = 255.255.0.0
+
+CLASS C: /24 = 255.255.255.0
+
+---
+
+## Network Address
+
+![alt text](image-8.png)
+
+If the HOST PORTION of an IP ADDRESS is ALL 0's, it means it is the NETWORK ADDRESS = the identifier of the network itself.
+
+Example: 192.168.1.0/24 = THIS is a NETWORK ADDRESS.
+
+A NETWORK ADDRESS cannot be assigned to a HOST. A NETWORK ADDRESS is the FIRST ADDRESS.
+
+![alt text](image-7.png)
+
+If the HOST PORTION of an IP ADDRESS is ALL 1's, it means it is the BROADCAST ADDRESS for the network.
+
+A BROADCAST ADDRESS cannot be assigned to a HOST.
+
+DESTINATION IP : 192.168.1.255 (Broadcast IP address) DESTINATION MAC : FFFF.FFFF.FFFF (Broadcast MAC address)
+
+Because of the two 'reserved' addresses, the range of USABLE HOST ADDRESSES is 1 to 254.
